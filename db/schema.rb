@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128210537) do
+ActiveRecord::Schema.define(version: 20151128173927) do
 
   create_table "artifacts", force: :cascade do |t|
     t.integer  "user",       limit: 4
     t.string   "msg",        limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "data",       limit: 255
   end
 
 end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :artifacts
+
+  get 'msg', :to => 'artifacts#msg'
+  post 'msg', :to=> 'artifacts#msg_post'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,16 +13,16 @@ Rails.application.routes.draw do
   # end
 
   # Example of regular route:
-    namespace :api,:defaults => { :format => 'json' } do
-      #post 'merchants', :to => 'merchants#registration'
-      #post 'merchants/:redmine_id/maf', :to => 'merchants#account_opening_form'
-      get 'msg', :to => 'artifacts#msg'
-      post 'msg', :to=> 'artifacts#msg_post'
-      #get  "merchants/categories", :to => 'merchants#categories'
-      #post "merchants/:redmine_id/documents", :to => 'merchants#documents'
-      #post "merchants/:redmine_id/commercial", :to => 'merchants#commercial'
-      #post "merchants/:redmine_id/payments", to: 'merchants#payments'
-end
+    # namespace :api,:defaults => { :format => 'json' } do
+    #   #post 'merchants', :to => 'merchants#registration'
+    #   #post 'merchants/:redmine_id/maf', :to => 'merchants#account_opening_form'
+    #   get 'msg', :to => 'artifacts#msg'
+    #   post 'msg', :to=> 'artifacts#msg_post'
+    #   #get  "merchants/categories", :to => 'merchants#categories'
+    #   #post "merchants/:redmine_id/documents", :to => 'merchants#documents'
+    #   #post "merchants/:redmine_id/commercial", :to => 'merchants#commercial'
+    #   #post "merchants/:redmine_id/payments", to: 'merchants#payments'
+    # end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

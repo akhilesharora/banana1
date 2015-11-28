@@ -51,6 +51,24 @@ class ArtifactsController < ApplicationController
     end
   end
 
+  def msg
+    stringData = ArtifactAPI.artifact_webservice(params[:data])
+    if !@stringdata.empty?
+      json_data = JSON.parse(stringData)
+    else
+    end
+    render json: @use_your_variable
+  end
+
+  def msg_post
+    stringData = ArtifactAPI.artifact_webservice(params[:data])
+    if !@stringdata.empty?
+      json_data = JSON.parse(stringData)
+    else
+    end
+    render json: @use_your_variable
+  end
+
   # DELETE /artifacts/1
   # DELETE /artifacts/1.json
   # def destroy
@@ -72,9 +90,9 @@ class ArtifactsController < ApplicationController
       params.require(:artifact).permit(:user, :msg)
     end
 
-    
 
-      
+
+
     end
 
 end
