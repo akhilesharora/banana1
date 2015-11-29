@@ -53,20 +53,21 @@ class ArtifactsController < ApplicationController
 
   def msg
     stringData = ArtifactAPI.artifact_webservice(params[:data])
-    if !@stringdata.empty?
+    if !stringData.empty?
       json_data = JSON.parse(stringData)
     else
     end
-    render json: @use_your_variable
+    render json: json_data
   end
+
 
   def msg_post
     stringData = ArtifactAPI.artifact_webservice(params[:data])
-    if !@stringdata.empty?
+    if !stringData.empty?
       json_data = JSON.parse(stringData)
     else
     end
-    render json: @use_your_variable
+    render json: json_data
   end
 
   # DELETE /artifacts/1
@@ -91,8 +92,6 @@ class ArtifactsController < ApplicationController
     end
 
 
-
-
     end
 
-end
+# end

@@ -10,8 +10,8 @@ default: &default
   database: banana
   host: localhost
   username: root
-  password: 
-  
+  password:
+
 
 development:
   <<: *default
