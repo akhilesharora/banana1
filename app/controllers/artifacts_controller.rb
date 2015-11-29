@@ -1,5 +1,7 @@
 class ArtifactsController < ApplicationController
   before_action :set_artifact, only: [:show, :edit, :update, :destroy]
+    @@var1 = 5
+    @@var2 = 10
 
   # GET /artifacts
   # GET /artifacts.json
@@ -57,9 +59,40 @@ class ArtifactsController < ApplicationController
       json_data = JSON.parse(stringData)
     else
     end
-    render json: json_data
+
+    puts @@var1
+    render json: {
+      opcode: json_data['opcode'],
+      server_opcode: bal(json_data['opcode'], params[:number], json_data['amount']),
+      amount: json_data['amount'],
+      balance1: @@var1,
+      balance2: @@var2,
+      destination: json_data['destination']
+    }
   end
 
+  def bal(opcode, phoneNumber, val)
+    if opcode == 'transact'
+      if phoneNumber == '9819254358'
+        if val <= @@var1
+          @@var1 = @@var1 - val
+          @@var2 = @@var2 + val
+          return "success"
+        else
+          return "no_balance"
+        end
+      elsif phoneNumber == '9819254359'
+        if val <= @@var2
+          @@var1 = @@var1 + val
+          @@var2 = @@var2 - val
+          return "success"
+        else
+          return "no_balance"
+        end
+      end
+      return "not_allowed"
+    end
+  end
 
   def msg_post
     stringData = ArtifactAPI.artifact_webservice(params[:data])
@@ -90,8 +123,4 @@ class ArtifactsController < ApplicationController
     def artifact_params
       params.require(:artifact).permit(:user, :msg)
     end
-
-
-    end
-
-# end
+  end
