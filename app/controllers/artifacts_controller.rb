@@ -1,7 +1,8 @@
 class ArtifactsController < ApplicationController
   before_action :set_artifact, only: [:show, :edit, :update, :destroy]
-    @@var1 = 5
-    @@var2 = 10
+    @@var1 = 5000
+    @@var2 = 10000
+    @@var3 = 0
 
   # GET /artifacts
   # GET /artifacts.json
@@ -63,7 +64,7 @@ class ArtifactsController < ApplicationController
     render json: {
       opcode: json_data['opcode'],
       source: params[:number],
-      server_opcode: bal(json_data['opcode'], params[:number], json_data['amount']),
+      server_opcode: bal(json_data['opcode'], params[:number], json_data['amount'], json_data['destination']),
       amount: json_data['amount'],
       balance1: @@var1,
       balance2: @@var2,
@@ -71,9 +72,9 @@ class ArtifactsController < ApplicationController
     }
   end
 
-  def bal(opcode, phoneNumber, val)
+  def bal(opcode, phoneNumber, val, destination)
     if opcode == 'transact'
-      if phoneNumber == '+919840629721'
+      if phoneNumber == '+918411849988'
         if val <= @@var1
           @@var1 = @@var1 - val
           @@var2 = @@var2 + val
@@ -81,7 +82,15 @@ class ArtifactsController < ApplicationController
         else
           return "no_balance"
         end
-      elsif phoneNumber == '+918411849988'
+      elsif destination == '+919892386663' # avi
+          @@var3 = @@var3 + val
+          @@var2 = @@var2 - val
+          return "success"
+      elsif phoneNumber == '+919892386663' # avi
+          @@var3 = @@var3 - val
+          @@var2 = @@var2 + val
+          return "success"
+      elsif phoneNumber == '+919840629721'
         if val <= @@var2
           @@var1 = @@var1 + val
           @@var2 = @@var2 - val
