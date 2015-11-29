@@ -60,9 +60,9 @@ class ArtifactsController < ApplicationController
     else
     end
 
-    puts @@var1
     render json: {
       opcode: json_data['opcode'],
+      source: params[:number],
       server_opcode: bal(json_data['opcode'], params[:number], json_data['amount']),
       amount: json_data['amount'],
       balance1: @@var1,
@@ -73,7 +73,7 @@ class ArtifactsController < ApplicationController
 
   def bal(opcode, phoneNumber, val)
     if opcode == 'transact'
-      if phoneNumber == '9819254358'
+      if phoneNumber == '+919840629721'
         if val <= @@var1
           @@var1 = @@var1 - val
           @@var2 = @@var2 + val
@@ -81,7 +81,7 @@ class ArtifactsController < ApplicationController
         else
           return "no_balance"
         end
-      elsif phoneNumber == '9819254359'
+      elsif phoneNumber == '+918411849988'
         if val <= @@var2
           @@var1 = @@var1 + val
           @@var2 = @@var2 - val
@@ -100,7 +100,17 @@ class ArtifactsController < ApplicationController
       json_data = JSON.parse(stringData)
     else
     end
-    render json: json_data
+
+    puts @@var1
+    render json: {
+      opcode: json_data['opcode'],
+      source: params[:number],
+      server_opcode: bal(json_data['opcode'], params[:number], json_data['amount']),
+      amount: json_data['amount'],
+      balance1: @@var1,
+      balance2: @@var2,
+      destination: json_data['destination']
+    }
   end
 
   # DELETE /artifacts/1
